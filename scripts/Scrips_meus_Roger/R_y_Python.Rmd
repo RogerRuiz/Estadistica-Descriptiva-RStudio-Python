@@ -87,4 +87,30 @@ r.datos_py.head()
 scan("../../scan_text.txt", sep = ";")
 ```
 
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+```
+
+```{python}
+def f(x):
+    return np.exp(-x)*np.cos(2*np.pi*x)
+```
+
+```{python}
+x1 = np.arange(0, 5.0, 0.1)
+x2 = np.arange(0, 5.0, 0.2)
+```
+
+```{python, fig.cap = "Hola"}
+plt.figure(1)
+
+plt.subplot(2,1,1)
+plt.plot(x1, f(x1), 'ro', x2, f(x2), 'k')
+
+plt.subplot(2,1,2)
+plt.plot(x2, f(x2), 'g--')
+
+plt.show()
+```
 
