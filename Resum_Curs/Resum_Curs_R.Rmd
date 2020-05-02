@@ -1,0 +1,33 @@
+---
+title: "Resum curs R"
+subtitle: "Curso Estadística descriptiva Udemy"
+author: "Roger Ruiz i Andrés"
+date: '`r format(Sys.Date(),"%e de %B, %Y")`'
+header-includes: 
+- \usepackage{dsfont}
+output:
+  pdf_document:
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+  word_document:
+    toc: yes
+    toc_depth: '3'
+lang: es
+---
+
+\newpage
+
+# Trabajando con R  
+  
+# Documentación con R Markdown  
+  
+# Librería `reticulate`  
+  
+# Estructuras de datos con R  
+  
+# Gráficos con la la función `plot` 
+  
+# Data Frames  
+  
+  
