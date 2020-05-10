@@ -1,0 +1,38 @@
+---
+title: "Estadística Descriptiva - Cualitativos"
+author: "Roger Ruiz i Andrés"
+date: "6/5/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Tablas de contingencia
+
+```{r}
+datos <- factor(c("H", "M", "M", "M", "H", "H", "M", "M"))
+table(datos)
+table(datos)["M"]
+sum(table(datos))
+prop.table(table(datos))
+#Si aplicamos prop.table a un vector, nos da la tabla de frecuencia
+#relativa de la tabla de contingencia absoluta qu etuviera los valores del vector
+prop.table(c(1,2,3,4,5,6))
+```
+
+```{r}
+names(which(table(datos)==3))
+names(which(table(datos)==max(table(datos))))#La moda
+
+moda <- function(d){
+  names(which(table(d) == max(table(d))))
+}
+
+moda_d = moda(datos)
+moda_d
+
+```
+
+

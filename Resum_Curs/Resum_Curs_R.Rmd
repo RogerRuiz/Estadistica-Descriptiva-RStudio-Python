@@ -10,9 +10,8 @@ output:
     number_sections: yes
     toc: yes
     toc_depth: 3
-  word_document:
-    toc: yes
-    toc_depth: '3'
+  html_document:
+    df_print: paged
 lang: es
 ---
 
@@ -23,6 +22,125 @@ lang: es
 # Documentación con R Markdown  
   
 # Librería `reticulate`  
+
+Para usar `Python` en `R`, primero hay que cargar la librería `reticulate` e indicar que versión de `Python` se debe usar. Es recomendable que se use la misma que la que se usa cuando se ejecuta **Anaconda**. 
+
+```{r}
+library(reticulate)
+use_python("/Users/rogerruiziandres/opt/anaconda3/bin/python3", required = TRUE)
+py_config()
+knitr::knit_engines$set(python = reticulate::eng_python)
+```
+
+Una vez cargada,   
+  
+1.  Podemos ejecutar *chunks* de `Python`:
+
+```{python}
+#Chunk Python
+def fsuma(x):
+  return x + 2
+```
+
+```{python}
+#Chunk Python
+fsuma(2)
+```
+
+
+2. Podemos invocar scrips de `Python`, donde podamos tener funciones guardadas, desde un *chunk* de `R`:
+
+```{r}
+#Chunk R
+source_python("script_python.py")#Tenemos definida la función "add" que suma dos números
+add(3,4)
+```
+
+\newpage
+
+3. Podemos declarar algún objeto desde un chunk de Python y recuperarlo en un chunk de R con **py$...*:
+
+```{python}
+#Chunk Python
+L1 = [1,2,3,4,5,6,7,8,9,10]
+```
+
+```{r}
+#Chunk R
+plot(py$L1)
+```
+
+4. Lo mismo con un ejemplo de pandas:
+
+```{python}
+#Chunk de Python
+import pandas as pd
+
+df = pd.read_csv("../data/bodyfat.txt", delimiter = " ")
+df.head()
+df.describe().transpose()
+```
+
+```{r}
+#Desde este chunk de R recuperamos el df anterior para tratarlo con R
+
+df.1 = py$df
+
+str(df.1)
+head(df.1)
+```
+
+\newpage
+
+5. Ejemplo de plot con Python:
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+```
+
+```{python}
+def f(x):
+    return np.exp(-x)*np.cos(2*np.pi*x)
+```
+
+```{python}
+x1 = np.arange(0, 5.0, 0.1)
+x2 = np.arange(0, 5.0, 0.2)
+```
+
+```{python, fig.cap = "Hola"}
+plt.figure(1)
+
+_ = plt.subplot(2,1,1)# con la sintaxis _ = evitamos que aparezcan comentarios en el resultado final
+_ = plt.plot(x1, f(x1), 'ro', x2, f(x2), 'k')
+
+_ = plt.subplot(2,1,2)
+_ = plt.plot(x2, f(x2), 'g--')
+
+plt.show()
+```
+
+
+
+\newpage
+
+6. Pasar objetos de R a Python:
+
+```{r}
+#Chunk de R
+vector1 <- c(1,2,3,4,5,6,7,8,9,10)
+vector2 <- c(1,2,3,4,5,6,7,8,9,10)
+```
+
+```{python}
+#Chunk de Python
+_ = plt.plot(r.vector1, r.vector2)
+plt.show()
+```
+
+
+
+\newpage
   
 # Estructuras de datos con R  
   
